@@ -1,0 +1,28 @@
+server:
+  port: 8989
+  servlet:
+    context-path: /cmfz
+    jsp:
+      init-parameters:
+        developement: true
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cmfz
+    username: root
+    password: 123
+    type: com.alibaba.druid.pool.DruidDataSource
+  mvc:
+    view:
+      suffix: .jsp
+      prefix: /
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+mybatis:
+  mapper-locations: classpath:com/baizhi/pwl/mapper/*DaoMapper.xml
+  type-handlers-package: com.baizhi.pwl.entity
+logging:
+  level:
+    com.baizhi.pwl.dao: debug
