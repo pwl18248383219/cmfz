@@ -19,15 +19,31 @@
     <script type="text/javascript">
         var goEasy = new GoEasy({
             host:'hangzhou.goeasy.io', //应用所在的区域地址: 【hangzhou.goeasy.io |singapore.goeasy.io】
-            // appkey Subscribe key 只能进行接收 Common key 既能接受也能发送
             appkey: "BC-c54978d75ba841fa89f22df0f70bdeb8", //替换为您的应用appkey
         });
-        goEasy.publish({
+        function send() {
+            goEasy.publish({
+                channel: "qqq", //替换为您自己的channel
+                message: $("#sendMessage1").val() //替换为您想要发送的消息内容
+            });
+            $("#sendMessage1").val("");
+        }
+        goEasy.subscribe({
             channel: "qqq", //替换为您自己的channel
-            message: "Rxx" //替换为您想要发送的消息内容
+            onMessage: function (message) {
+                // alert(message.content);
+                $("#receiveMessage1").append(message.content).append("&#10;");
+            }
         });
     </script>
 </head>
 <body>
-
+<form class="form-inline">
+    <textarea class="form-control" rows="10" id="receiveMessage1" readonly></textarea>
+    <br/>
+    <div class="form-group">
+        <input type="email" class="form-control" id="sendMessage1">
+    </div>
+    <button type="button" class="btn btn-default" onclick="send()">发送</button>
+</form>
 </body>
